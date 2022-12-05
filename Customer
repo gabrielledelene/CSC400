@@ -1,0 +1,36 @@
+//Customer.java
+public class Customer {
+	private String name;
+	private int orderNumber;
+	private double totalCost;
+	//constructor
+	public Customer(String name, int orderNumber, double totalCost) {
+		super();
+		this.name = name;
+		this.orderNumber = orderNumber;
+		this.totalCost = totalCost;
+	}
+	//getter and setter functions
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public double getTotalCost() {
+		return totalCost;
+	}
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+	//toString()
+	public String toString() {
+		return orderNumber+"|"+name+"|"+totalCost;
+	}
+}
