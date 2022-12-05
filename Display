@@ -1,0 +1,83 @@
+//Display.java
+public class Display {
+	private Customer arrByName[];
+	private Customer arrByOrder[];
+	private int size;
+	private int currentSize;
+	//resize the array
+	private void resize() {
+		int size=arrByName.length * 2;
+		Customer[] arr=new Customer[size];
+		for(int i=0;i<arrByName.length;i++)
+			arr[i]=arrByName[i];
+		arrByName = arr;
+		
+		size=arrByOrder.length * 2;
+		arr=new Customer[size];
+		for(int i=0;i<arrByOrder.length;i++)
+			arr[i]=arrByOrder[i];
+		arrByOrder = arr;
+		
+		this.size = size;
+		currentSize = 0;
+	}
+	//constructor
+	public Display() {
+		this.size=10;
+		arrByName = new Customer[size];
+		arrByOrder = new Customer[size];
+	}
+	//insert order into arrays
+	public void insertOrder(Customer cust) {
+		if(currentSize==size)
+			resize();
+		
+		arrByName[currentSize]=cust;
+		arrByOrder[currentSize]=cust;
+		
+		currentSize += 1;
+		
+		QuickSort.sort(arrByName, 0, currentSize-1, "customerName");
+		QuickSort.sort(arrByOrder, 0, currentSize-1, "orderNo");
+		print();
+	}
+	//remove order from array
+	public void removeOrder(Customer cust) {
+		int i;
+		for(i=0;i<currentSize;i++) {
+			if(cust==arrByName[i])
+				break;
+		}
+		for(int k=i;k<currentSize-1;k++)
+			arrByName[i]=arrByName[i+1];
+		
+		for(i=0;i<currentSize;i++) {
+			if(cust==arrByOrder[i])
+				break;
+		}
+		for(int k=i;k<currentSize-1;k++)
+			arrByOrder[i]=arrByOrder[i+1];
+		
+		arrByName[currentSize-1]=null;
+		arrByOrder[currentSize-1]=null;
+		currentSize -= 1;
+		print();
+		
+	}
+	//print two array
+	public void print() {
+		System.out.println();
+		System.out.print("Sort by name: ");
+		print(arrByName);
+		System.out.println();
+		System.out.print("Sort by orderNo: ");
+		print(arrByOrder);
+		System.out.println();
+	}
+	//overload print() method
+	public void print(Customer[] arr) {
+		for(int i=0;i<currentSize;i++)
+			System.out.print(arr[i]+"->");
+		System.out.println();
+	}
+}
